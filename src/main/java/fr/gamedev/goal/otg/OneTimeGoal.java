@@ -8,6 +8,7 @@ import fr.gamedev.goal.Goal;
  */
 public class OneTimeGoal {
 
+    /** Goal to reach. */
     Goal goal;
 
     /**
