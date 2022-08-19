@@ -1,26 +1,26 @@
 package fr.gamedev.goal.tlg;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Goal must be reached before a fixed date.
  * @author djer13
  */
 public class FixedTimeLimitedGoal {
-    private Date limit;
+    private LocalDateTime limit;
 
     /**
      * @return the limit
      */
-    public Date getLimit() {
+    public LocalDateTime getLimit() {
         return limit;
     }
 
     /**
-     * @param limit the limit to set
+     * @param theLimit the limit to set
      */
-    public void setLimit(Date limit) {
-        this.limit = limit;
+    public void setLimit(LocalDateTime theLimit) {
+        this.limit = theLimit;
     }
 
 }

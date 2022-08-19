@@ -1,6 +1,7 @@
 package fr.gamedev.goal.tlg;
 
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 
 /**
  * Goal limited by time relative to a specific Date.
@@ -9,18 +10,33 @@ import java.util.concurrent.TimeUnit;
 public class RelativeTimeLimitedGoal {
     /** Used to calculate the "real" date for a specific Use Case (User).*/
     private String eventCode;
+    /** The (calculated) initial Date to calculate time range. */
+    private LocalDateTime initialDate;
     /** Number of step to calculate the "real" date. */
     private Long step;
     /** unit of step.*/
-    private TimeUnit unit;
+    private TemporalUnit unit;
 
     /** Goal to reach. */
     private FixedTimeLimitedGoal goal;
 
-    public RelativeTimeLimitedGoal(String theEventCode, Long TheStep, TimeUnit theUnit) {
+    public RelativeTimeLimitedGoal(String theEventCode, LocalDateTime theInitialDate, Long TheStep,
+            TemporalUnit theUnit) {
         this.eventCode = theEventCode;
+        this.initialDate = theInitialDate;
         this.step = TheStep;
         this.unit = theUnit;
+
+        defineGoalDate();
+    }
+
+    /** Define (calculate) the timed Goal.*/
+    private void defineGoalDate() {
+
+        if (null == this.goal) {
+            this.goal = new FixedTimeLimitedGoal();
+        }
+        this.initialDate.plus(this.step, this.unit);
     }
 
     /**
@@ -38,6 +54,21 @@ public class RelativeTimeLimitedGoal {
     }
 
     /**
+     * @return the initialDate
+     */
+    public LocalDateTime getInitialDate() {
+        return initialDate;
+    }
+
+    /**
+     * @param initialDate the initialDate to set
+     */
+    public void setInitialDate(LocalDateTime initialDate) {
+        this.initialDate = initialDate;
+        defineGoalDate();
+    }
+
+    /**
      * @return the step
      */
     public Long getStep() {
@@ -49,20 +80,22 @@ public class RelativeTimeLimitedGoal {
      */
     public void setStep(Long step) {
         this.step = step;
+        defineGoalDate();
     }
 
     /**
      * @return the unit
      */
-    public TimeUnit getUnit() {
+    public TemporalUnit getUnit() {
         return unit;
     }
 
     /**
      * @param unit the unit to set
      */
-    public void setUnit(TimeUnit unit) {
+    public void setUnit(TemporalUnit unit) {
         this.unit = unit;
+        defineGoalDate();
     }
 
     /**
@@ -71,12 +104,4 @@ public class RelativeTimeLimitedGoal {
     public FixedTimeLimitedGoal getGoal() {
         return goal;
     }
-
-    /**
-     * @param goal the goal to set
-     */
-    public void setGoal(FixedTimeLimitedGoal goal) {
-        this.goal = goal;
-    }
-
 }
