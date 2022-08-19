@@ -1,6 +1,6 @@
 package fr.gamedev.goal.otg;
 
-import fr.gamedev.goal.Goal;
+import fr.gamedev.goal.NumberGoal;
 
 /**
  * One time goal : a simple goal to reach (one time).
@@ -9,19 +9,19 @@ import fr.gamedev.goal.Goal;
 public class OneTimeGoal {
 
     /** Goal to reach. */
-    Goal goal;
+    NumberGoal goal;
 
     /**
      * @return the goal
      */
-    public Goal getGoal() {
+    public NumberGoal getGoal() {
         return goal;
     }
 
     /**
      * @param goal the goal to set
      */
-    public void setGoal(Goal goal) {
+    public void setGoal(NumberGoal goal) {
         this.goal = goal;
     }
 }

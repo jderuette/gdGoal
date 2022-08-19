@@ -5,7 +5,7 @@ package fr.gamedev.goal;
  * Simple goal is only one number to reach.
  * @author djer13
  */
-public class Goal {
+public class NumberGoal implements Goal<Long> {
 
     private Long limit;
 

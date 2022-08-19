@@ -22,7 +22,7 @@ public class GoalEstimator {
     }
 
     public Boolean isReached(Long currentValue, OneTimeGoal otGoal) {
-        Goal goal = otGoal.getGoal();
+        NumberGoal goal = otGoal.getGoal();
 
         return currentValue >= goal.getLimit();
     }
