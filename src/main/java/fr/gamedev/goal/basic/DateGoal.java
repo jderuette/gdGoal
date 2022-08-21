@@ -1,4 +1,4 @@
-package fr.gamedev.goal.tlg;
+package fr.gamedev.goal.basic;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +10,23 @@ import fr.gamedev.goal.Goal;
  */
 public class DateGoal implements Goal<LocalDateTime> {
     private LocalDateTime limit;
+    private DateOperation operation;
+
+    public DateGoal(final LocalDateTime theLimit, final DateOperation theOperation) {
+        this.limit = theLimit;
+        this.operation = theOperation;
+    }
 
     public Boolean isReached(LocalDateTime value) {
-        return value.isAfter(this.limit);
+        Boolean isReached = Boolean.FALSE;
+        if (DateOperation.BEFORE.equals(operation)) {
+            isReached = value.isBefore(this.limit);
+        } else if (DateOperation.SAME.equals(operation)) {
+            isReached = value.isEqual(this.limit);
+        } else if (DateOperation.AFTER.equals(operation)) {
+            isReached = value.isAfter(this.limit);
+        }
+        return isReached;
     }
 
     /**
@@ -27,6 +41,20 @@ public class DateGoal implements Goal<LocalDateTime> {
      */
     public void setLimit(LocalDateTime theLimit) {
         this.limit = theLimit;
+    }
+
+    /**
+     * @return the operation
+     */
+    public DateOperation getOperation() {
+        return operation;
+    }
+
+    /**
+     * @param operation the operation to set
+     */
+    public void setOperation(DateOperation operation) {
+        this.operation = operation;
     }
 
 }

@@ -3,6 +3,9 @@ package fr.gamedev.goal.tlg;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalUnit;
 
+import fr.gamedev.goal.basic.DateGoal;
+import fr.gamedev.goal.basic.DateOperation;
+
 /**
  * Goal limited by time relative to a specific Date.
  * The eventCode can be used to collect date for a specific 
@@ -35,11 +38,12 @@ public class RelativeTimeLimitedGoal {
 
     /** Define (calculate) the timed Goal.*/
     private void defineGoalDate() {
-
+        LocalDateTime calculatedDate = this.initialDate.plus(this.step, this.unit);
         if (null == this.goal) {
-            this.goal = new DateGoal();
+            this.goal = new DateGoal(calculatedDate, DateOperation.BEFORE);
+        } else {
+            this.goal.setLimit(calculatedDate);
         }
-        this.initialDate.plus(this.step, this.unit);
     }
 
     /**
