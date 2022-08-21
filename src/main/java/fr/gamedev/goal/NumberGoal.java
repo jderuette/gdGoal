@@ -9,6 +9,10 @@ public class NumberGoal implements Goal<Long> {
 
     private Long limit;
 
+    public Boolean isReached(Long value) {
+        return value >= this.limit;
+    }
+
     /**
      * @return the limit
      */

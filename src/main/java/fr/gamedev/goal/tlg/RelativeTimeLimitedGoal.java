@@ -5,6 +5,9 @@ import java.time.temporal.TemporalUnit;
 
 /**
  * Goal limited by time relative to a specific Date.
+ * The eventCode can be used to collect date for a specific 
+ * User (account_created, first_login, point_java_1000_reached,...)
+ * or UseCase (start_of_year, start_of_current_season, end_of_chrismass_holydays,....)
  * @author djer13
  */
 public class RelativeTimeLimitedGoal {
@@ -18,7 +21,7 @@ public class RelativeTimeLimitedGoal {
     private TemporalUnit unit;
 
     /** Goal to reach. */
-    private FixedTimeLimitedGoal goal;
+    private DateGoal goal;
 
     public RelativeTimeLimitedGoal(String theEventCode, LocalDateTime theInitialDate, Long TheStep,
             TemporalUnit theUnit) {
@@ -34,7 +37,7 @@ public class RelativeTimeLimitedGoal {
     private void defineGoalDate() {
 
         if (null == this.goal) {
-            this.goal = new FixedTimeLimitedGoal();
+            this.goal = new DateGoal();
         }
         this.initialDate.plus(this.step, this.unit);
     }
@@ -101,7 +104,7 @@ public class RelativeTimeLimitedGoal {
     /**
      * @return the goal
      */
-    public FixedTimeLimitedGoal getGoal() {
+    public DateGoal getGoal() {
         return goal;
     }
 }
