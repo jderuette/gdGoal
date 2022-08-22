@@ -1,6 +1,6 @@
 package fr.gamedev.goal.otg;
 
-import fr.gamedev.goal.NumberGoal;
+import fr.gamedev.goal.basic.NumberGoal;
 
 /**
  * One time goal : a simple goal to reach (one time).

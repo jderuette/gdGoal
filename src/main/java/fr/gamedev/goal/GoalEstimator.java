@@ -2,8 +2,9 @@ package fr.gamedev.goal;
 
 import java.time.LocalDateTime;
 
+import fr.gamedev.goal.basic.DateGoal;
+import fr.gamedev.goal.basic.NumberGoal;
 import fr.gamedev.goal.otg.OneTimeGoal;
-import fr.gamedev.goal.tlg.DateGoal;
 import fr.gamedev.goal.tlg.RelativeTimeLimitedGoal;
 
 /**

@@ -5,33 +5,27 @@ import java.time.LocalDateTime;
 import fr.gamedev.goal.Goal;
 
 /**
- * Goal must be reached before a fixed date.
+ * Goal is reached (or not) with date comparison.
  * @author djer13
  */
 public class DateGoal implements Goal<LocalDateTime> {
     private LocalDateTime limit;
-    private DateOperation operation;
+    private LimitOperation operation;
 
-    public DateGoal(final LocalDateTime theLimit, final DateOperation theOperation) {
+    public DateGoal(final LocalDateTime theLimit, final LimitOperation theOperation) {
         this.limit = theLimit;
         this.operation = theOperation;
     }
 
+    @Override
     public Boolean isReached(LocalDateTime value) {
-        Boolean isReached = Boolean.FALSE;
-        if (DateOperation.BEFORE.equals(operation)) {
-            isReached = value.isBefore(this.limit);
-        } else if (DateOperation.SAME.equals(operation)) {
-            isReached = value.isEqual(this.limit);
-        } else if (DateOperation.AFTER.equals(operation)) {
-            isReached = value.isAfter(this.limit);
-        }
-        return isReached;
+        return this.operation.apply(value, this.limit);
     }
 
     /**
      * @return the limit
      */
+    @Override
     public LocalDateTime getLimit() {
         return limit;
     }
@@ -39,6 +33,7 @@ public class DateGoal implements Goal<LocalDateTime> {
     /**
      * @param theLimit the limit to set
      */
+    @Override
     public void setLimit(LocalDateTime theLimit) {
         this.limit = theLimit;
     }
@@ -46,14 +41,14 @@ public class DateGoal implements Goal<LocalDateTime> {
     /**
      * @return the operation
      */
-    public DateOperation getOperation() {
+    public LimitOperation getOperation() {
         return operation;
     }
 
     /**
      * @param operation the operation to set
      */
-    public void setOperation(DateOperation operation) {
+    public void setOperation(LimitOperation operation) {
         this.operation = operation;
     }
 

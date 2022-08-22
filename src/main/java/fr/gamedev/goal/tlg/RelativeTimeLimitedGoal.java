@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalUnit;
 
 import fr.gamedev.goal.basic.DateGoal;
-import fr.gamedev.goal.basic.DateOperation;
+import fr.gamedev.goal.basic.LimitOperation;
 
 /**
  * Goal limited by time relative to a specific Date.
@@ -40,7 +40,7 @@ public class RelativeTimeLimitedGoal {
     private void defineGoalDate() {
         LocalDateTime calculatedDate = this.initialDate.plus(this.step, this.unit);
         if (null == this.goal) {
-            this.goal = new DateGoal(calculatedDate, DateOperation.BEFORE);
+            this.goal = new DateGoal(calculatedDate, LimitOperation.BEFORE);
         } else {
             this.goal.setLimit(calculatedDate);
         }
