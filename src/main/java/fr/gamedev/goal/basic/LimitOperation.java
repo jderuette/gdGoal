@@ -56,4 +56,9 @@ public enum LimitOperation {
     public abstract boolean apply(Long currentValue, Long limit);
 
     public abstract boolean apply(LocalDateTime currentDate, LocalDateTime limit);
+
+    @Override
+    public String toString() {
+        return "LimitOperation." + this.text;
+    }
 }
